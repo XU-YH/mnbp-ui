@@ -1,8 +1,8 @@
 {
-  "name": "ruoyi",
-  "version": "2.0.0",
-  "description": "若依管理系统",
-  "author": "若依",
+  "name": "mbbp",
+  "version": "1.0.0",
+  "description": "美年大健康业务平台",
+  "author": "xuyinhui",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

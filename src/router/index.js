@@ -104,6 +104,16 @@ export const constantRoutes = [
         meta: { title: '修改生成配置' }
       }
     ]
+  },
+  {
+    path: '/weixin',
+    component: () => import('@/views/weixin'),
+    hidden: true
+  },
+  {
+    path: '/weixin/insuranceInfo',
+    component: () => import('@/views/weixin/insuranceInfo'),
+    hidden: true
   }
 ]
 
