@@ -1,9 +1,11 @@
 <template>
   <div class="dashboard-editor-container">
 
-    <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+
+    <!--<panel-group @handleSetLineChartData="handleSetLineChartData" />-->
+
+    <!--<el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
 
@@ -23,9 +25,9 @@
           <bar-chart />
         </div>
       </el-col>
-    </el-row>
+    </el-row>-->
 
-    
+
   </div>
 </template>
 

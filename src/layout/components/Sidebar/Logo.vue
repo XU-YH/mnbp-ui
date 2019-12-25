@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      title: '若依管理系统',
+      title: '美年大健康业务平台',
       logo: logoImg
     }
   }
