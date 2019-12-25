@@ -2,6 +2,7 @@
   <div class="app-container">
     <el-row :gutter="20">
       <!--部门数据-->
+      <!-- 隐藏部门
       <el-col :span="4" :xs="24">
         <div class="head-container">
           <el-input
@@ -25,8 +26,9 @@
           />
         </div>
       </el-col>
+      -->
       <!--用户数据-->
-      <el-col :span="20" :xs="24">
+      <el-col :span="24" :xs="24">
         <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
           <el-form-item label="用户名称" prop="userName">
             <el-input
@@ -137,7 +139,14 @@
           <el-table-column label="用户编号" align="center" prop="userId" />
           <el-table-column label="用户名称" align="center" prop="userName" />
           <el-table-column label="用户昵称" align="center" prop="nickName" />
-          <el-table-column label="部门" align="center" prop="dept.deptName" />
+          <el-table-column label="角色" align="center">
+            <template slot-scope="scope">
+              <span v-for="(role, i) in scope.row.roles">
+                {{ role.roleName }}
+                <span v-if="i !== scope.row.roles.length -1">，</span>
+              </span>
+            </template>
+          </el-table-column>
           <el-table-column label="手机号码" align="center" prop="phonenumber" width="120" />
           <el-table-column label="状态" align="center">
             <template slot-scope="scope">
@@ -206,9 +215,11 @@
               <el-input v-model="form.nickName" placeholder="请输入用户昵称" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" v-show="false">
             <el-form-item label="归属部门" prop="deptId">
-              <treeselect v-model="form.deptId" :options="deptOptions" placeholder="请选择归属部门" />
+              <!-- 隐藏部门，默认部门为 deptId=100，PICC_美年 -->
+              <el-input v-model="form.deptId" value="100" />
+              <!--<treeselect v-model="form.deptId" :options="deptOptions" placeholder="请选择归属部门" />-->
             </el-form-item>
           </el-col>
           <el-col :span="12">
