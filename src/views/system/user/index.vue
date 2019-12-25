@@ -255,6 +255,7 @@
             </el-form-item>
           </el-col>
 
+          <!-- 去除岗位
           <el-col :span="12">
             <el-form-item label="岗位">
               <el-select v-model="form.postIds" multiple placeholder="请选择">
@@ -268,6 +269,8 @@
               </el-select>
             </el-form-item>
           </el-col>
+          -->
+
           <el-col :span="12">
             <el-form-item label="角色">
               <el-select v-model="form.roleIds" multiple placeholder="请选择">
