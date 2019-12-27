@@ -106,6 +106,19 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/scheme',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'clause/:id(\\d+)',
+        component: () => import('@/views/business/scheme/clause'),
+        name: 'Data',
+        meta: { title: '方案清单', icon: '' }
+      }
+    ]
+  },
+  {
     path: '/weixin',
     component: () => import('@/views/weixin'),
     hidden: true
