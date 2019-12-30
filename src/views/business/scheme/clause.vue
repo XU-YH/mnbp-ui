@@ -70,7 +70,7 @@
     <el-table v-loading="loading" :data="clauseList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!--<el-table-column label="ID" align="center" prop="id" />-->
-      <el-table-column label="方案代码" align="center" prop="schemeCode" />
+      <el-table-column label="方案名称" align="center" prop="schemeName" />
       <el-table-column label="条款名称" align="center" prop="clauseName" />
       <el-table-column label="赔偿限额" align="center" prop="compensationLimit" />
       <el-table-column label="条款内容" align="center" prop="clauseContent" />
@@ -140,6 +140,8 @@ export default {
       loading: true,
       // 选中数组
       ids: [],
+      // 选中条款数组
+      clauseNames: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -152,6 +154,8 @@ export default {
       defaultSchemeId: "",
       // 默认方案code
       defaultSchemeCode: "",
+      // 默认方案名称
+      defaultSchemeName: "",
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -187,6 +191,7 @@ export default {
       getInsuranceScheme(schemeId).then(response => {
         this.queryParams.schemeCode = response.data.schemeCode;
         this.defaultSchemeCode = response.data.schemeCode;
+        this.defaultSchemeName = response.data.schemeName;
         this.defaultSchemeId = schemeId;
         this.getList();
       })
@@ -234,6 +239,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
+      this.clauseNames = selection.map(item => item.clauseName)
       this.single = selection.length!=1
       this.multiple = !selection.length
     },
@@ -287,7 +293,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除方案条款编号为"' + ids + '"的数据项?', "警告", {
+      const clauseNames = row.clauseName || this.clauseNames;
+      this.$confirm('是否确认删除条款名称为"' + clauseNames + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

@@ -51,3 +51,12 @@ export function exportCustomer(query) {
     params: query
   })
 }
+
+// 权益查询，查询客户承保信息
+export function listCustomerInsuranceInfo(query) {
+  return request({
+    url: '/business/customer/insuranceInfo/list',
+    method: 'get',
+    params: query
+  })
+}

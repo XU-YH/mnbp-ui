@@ -133,6 +133,8 @@ export default {
       loading: true,
       // 选中数组
       ids: [],
+      // 选中方案数组
+      schemeNames: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
