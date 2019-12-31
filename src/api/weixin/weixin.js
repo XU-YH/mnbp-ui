@@ -1,10 +1,10 @@
 import request from '@/utils/request'
-import { praseStrEmpty } from "@/utils/ruoyi";
+import { praseStrEmpty } from '@/utils/ruoyi'
 
 // 查询客户承保信息
 export function getInsuranceInfo(query) {
   return request({
-    url: '/weixin/insuranceInfo',
+    url: '/weixin/getInsuranceInfo',
     method: 'get',
     params: query
   })

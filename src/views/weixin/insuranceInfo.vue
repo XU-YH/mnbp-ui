@@ -5,8 +5,8 @@
                 <span class="title_text">承保信息</span>
             </section>
         </el-header>
-        <el-main id="el_main">
-            <div>
+        <el-main id="el_main" v-loading="loading">
+            <template v-if="insuranceInfo !== undefined">
                 <h4>您已获得由美年大健康赠送的保险权益</h4>
                 由PICC人保财险承保
 
@@ -16,55 +16,63 @@
                         <div class="grid-content">被保险人</div>
                     </el-col>
                     <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
-                        <div class="grid-content">张三</div>
+                        <div class="grid-content" v-text="insuranceInfo.customerName"></div>
                     </el-col>
-                    <el-divider></el-divider>
+                    <el-divider/>
                 </el-row>
                 <el-row :gutter="10">
                     <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
                         <div class="grid-content">保障期限</div>
                     </el-col>
                     <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
-                        <div class="grid-content">2019-12-12</div>
+                        <div class="grid-content"
+                             v-text="parseTime(insuranceInfo.exminatidonDate, '{y}-{m}-{d}')"></div>
                     </el-col>
-                    <el-divider></el-divider>
+                    <el-divider/>
                 </el-row>
-                <el-row :gutter="10">
+                <el-row :gutter="10" v-for="schemeClause in insuranceInfo.schemeClauseList" :key="schemeClause.id">
                     <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
-                        <div class="grid-content">体检过程中发生的意外身故或残疾赔偿</div>
+                        <div class="grid-content" v-text="schemeClause.clauseName"></div>
                     </el-col>
                     <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
-                        <div class="grid-content">20000</div>
+                        <div class="grid-content" v-text="schemeClause.compensationLimit"></div>
                     </el-col>
-                    <el-divider></el-divider>
+                    <el-divider/>
                 </el-row>
-                <el-row :gutter="10">
-                    <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
-                        <div class="grid-content">体检指标异常复查费用补偿（报销型）</div>
-                    </el-col>
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
-                        <div class="grid-content">20000</div>
-                    </el-col>
-                    <el-divider></el-divider>
+            </template>
+            <template v-else>
+                <el-row>
+                    您尚未在PICC承保相关权益
                 </el-row>
-                <el-row :gutter="10">
-                    <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
-                        <div class="grid-content">检后重大疾病保险</div>
-                    </el-col>
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
-                        <div class="grid-content">20000</div>
-                    </el-col>
-                    <el-divider></el-divider>
-                </el-row>
-            </div>
+            </template>
         </el-main>
     </div>
 </template>
-
 <script>
   import { getInsuranceInfo } from '@/api/weixin/weixin'
 
-  export default {}
+  export default {
+    data() {
+      return {
+        // 遮罩层
+        loading: true,
+        insuranceInfo: undefined
+      }
+    },
+    created() {
+      const queryParams = this.$route.query
+      this.getInsuranceInfo(queryParams)
+    },
+    methods: {
+      /** 查询微信承保信息 */
+      getInsuranceInfo(queryParams) {
+        getInsuranceInfo(queryParams).then(response => {
+          this.insuranceInfo = response.data
+          this.loading = false
+        })
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
