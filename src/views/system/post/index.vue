@@ -107,7 +107,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -319,7 +319,7 @@ export default {
         }).then(function() {
           return exportPost(queryParams);
         }).then(response => {
-          this.download(response.msg);
+          this.download(response.msg, true);
         }).catch(function() {});
     }
   }

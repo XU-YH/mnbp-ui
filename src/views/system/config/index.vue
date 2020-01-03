@@ -338,7 +338,7 @@ export default {
         }).then(function() {
           return exportConfig(queryParams);
         }).then(response => {
-          this.download(response.msg);
+          this.download(response.msg, true);
         }).catch(function() {});
     }
   }

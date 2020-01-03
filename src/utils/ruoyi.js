@@ -76,8 +76,8 @@ export function selectDictLabel(datas, value) {
 }
 
 // 通用下载方法
-export function download(fileName) {
-	window.location.href = baseURL + "/common/download?fileName=" + encodeURI(fileName) + "&delete=" + true;
+export function download(fileName, isDelete) {
+	window.location.href = baseURL + "/common/download?fileName=" + encodeURI(fileName) + "&delete=" + isDelete;
 }
 
 // 字符串格式化(%s )

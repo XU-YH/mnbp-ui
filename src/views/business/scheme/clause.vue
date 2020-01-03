@@ -315,7 +315,7 @@ export default {
         }).then(function() {
           return exportClause(queryParams);
         }).then(response => {
-          this.download(response.msg);
+          this.download(response.msg, true);
         }).catch(function() {});
     }
   }

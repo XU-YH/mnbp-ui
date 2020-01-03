@@ -642,7 +642,7 @@ export default {
         }).then(function() {
           return exportUser(queryParams);
         }).then(response => {
-          this.download(response.msg);
+          this.download(response.msg, true);
         }).catch(function() {});
     },
     /** 导入按钮操作 */
@@ -653,7 +653,7 @@ export default {
     /** 下载模板操作 */
     importTemplate() {
       importTemplate().then(response => {
-        this.download(response.msg);
+        this.download(response.msg, true);
       });
     },
     // 文件上传中处理
