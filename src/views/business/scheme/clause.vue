@@ -1,30 +1,25 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" label-width="68px">
-      <el-form-item label="方案代码" prop="schemeCode">
-        <el-input
-          v-model="queryParams.schemeCode"
-          placeholder="请输入方案代码"
-          clearable
-          size="small"
-          :disabled="true"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="条款名称" prop="clauseName">
-        <el-input
-          v-model="queryParams.clauseName"
-          placeholder="请输入条款名称"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
+    <el-row :gutter="20">
+        <el-col :span="1.5">方案代码：</el-col>
+        <el-col :span="1.5">
+            <el-input
+                v-model="defaultSchemeCode"
+                size="medium"
+                :disabled="true">
+            </el-input>
+        </el-col>
+        <el-col :span="1.5">方案名称：</el-col>
+        <el-col :span="1.5">
+            <el-input
+                v-model="defaultSchemeName"
+                size="medium"
+                :disabled="true">
+            </el-input>
+        </el-col>
+    </el-row>
+
+    <div style="margin-top: 30px"><el-divider></el-divider></div>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -33,7 +28,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['business:clause:add']"
+          v-hasPermi="['business:insuranceScheme:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -43,7 +38,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['business:clause:edit']"
+          v-hasPermi="['business:insuranceScheme:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -53,7 +48,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['business:clause:remove']"
+          v-hasPermi="['business:insuranceScheme:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -62,7 +57,7 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['business:clause:export']"
+          v-hasPermi="['business:insuranceScheme:export']"
         >导出</el-button>
       </el-col>
     </el-row>
@@ -70,7 +65,6 @@
     <el-table v-loading="loading" :data="clauseList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <!--<el-table-column label="ID" align="center" prop="id" />-->
-      <el-table-column label="方案名称" align="center" prop="schemeName" />
       <el-table-column label="条款名称" align="center" prop="clauseName" />
       <el-table-column label="赔偿限额" align="center" prop="compensationLimit" />
       <el-table-column label="条款内容" align="center" prop="clauseContent" />
@@ -81,14 +75,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['business:clause:edit']"
+            v-hasPermi="['business:insuranceScheme:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['business:clause:remove']"
+            v-hasPermi="['business:insuranceScheme:remove']"
           >删除</el-button>
         </template>
       </el-table-column>

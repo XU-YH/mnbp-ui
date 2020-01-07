@@ -113,7 +113,7 @@ export const constantRoutes = [
       {
         path: 'clause/:id(\\d+)',
         component: () => import('@/views/business/scheme/clause'),
-        name: 'Data',
+        name: 'Clause',
         meta: { title: '方案清单', icon: '' }
       }
     ]

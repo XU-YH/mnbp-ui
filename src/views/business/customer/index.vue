@@ -108,13 +108,13 @@
             <el-table-column label="性别" align="center" prop="sex" :formatter="sexFormat"/>
             <el-table-column label="出生日期" align="center" prop="birthdate" width="180">
                 <template slot-scope="scope">
-                    <span>{{ parseTime(scope.row.birthdate) }}</span>
+                    <span>{{ parseTime(scope.row.birthdate, '{y}-{m}-{d}') }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="联系电话" align="center" prop="phonenumber" width="110"/>
             <el-table-column label="到检日期" align="center" prop="examinatidonDate" width="180">
                 <template slot-scope="scope">
-                    <span>{{ parseTime(scope.row.examinatidonDate) }}</span>
+                    <span>{{ parseTime(scope.row.examinatidonDate, '{y}-{m}-{d}') }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="省份" align="center" prop="province"/>
