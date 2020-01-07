@@ -60,3 +60,11 @@ export function listCustomerInsuranceInfo(query) {
     params: query
   })
 }
+
+// 下载人员导入模板
+export function importTemplate() {
+  return request({
+    url: '/business/customer/importTemplate',
+    method: 'get'
+  })
+}
