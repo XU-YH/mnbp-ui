@@ -2,15 +2,15 @@
     <div style="background-color: #eef1f6; width: 100%; height: 100%">
         <el-header id="head_top">
             <section class="title_head">
-                <span class="title_text">承保信息</span>
+                承保信息
             </section>
         </el-header>
         <el-main id="el_main" v-loading="loading">
             <template v-if="insuranceInfo !== undefined">
-                <h4>您已获得由美年大健康赠送的保险权益</h4>
-                由PICC人保财险承保
+                <h4 style="text-indent:2em;">尊敬的【{{queryParams.idNumber}}】，您已获得由美年大健康赠送的保险权益</h4>
+                <span style="font-size: 0.9rem;">由PICC人保财险承保</span>
 
-                <h4 align="center" style="margin-top: 20%">保障内容</h4>
+                <h4 align="center" style="margin: 6rem 0 3rem 0">保障内容</h4>
                 <el-row :gutter="10">
                     <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
                         <div class="grid-content">被保险人</div>
@@ -21,12 +21,12 @@
                     <el-divider/>
                 </el-row>
                 <el-row :gutter="10">
-                    <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
+                    <el-col :xs="10" :sm="10" :md="10" :lg="10" :xl="10">
                         <div class="grid-content">保障期限</div>
                     </el-col>
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" align="right">
+                    <el-col :xs="14" :sm="14" :md="14" :lg="14" :xl="14" align="right">
                         <div class="grid-content"
-                             v-text="parseTime(insuranceInfo.exminatidonDate, '{y}-{m}-{d}')"></div>
+                             v-text="parseTime(insuranceInfo.exminatidonDate, '{y}-{m}-{d}') + '至' + parseTime(addYear(insuranceInfo.exminatidonDate, 1), '{y}-{m}-{d}')"></div>
                     </el-col>
                     <el-divider/>
                 </el-row>
@@ -42,7 +42,7 @@
             </template>
             <template v-else>
                 <el-row>
-                    您尚未在PICC承保相关权益
+                    <h4 style="text-indent:2em;">尊敬的【{{queryParams.idNumber}}】，您尚未在PICC承保相关权益</h4>
                 </el-row>
             </template>
         </el-main>
@@ -56,12 +56,16 @@
       return {
         // 遮罩层
         loading: true,
-        insuranceInfo: undefined
+        insuranceInfo: undefined,
+        queryParams: {
+          name: undefined,
+          idNumber: undefined
+        }
       }
     },
     created() {
-      const queryParams = this.$route.query
-      this.getInsuranceInfo(queryParams)
+      this.queryParams = this.$route.query
+      this.getInsuranceInfo(this.queryParams)
     },
     methods: {
       /** 查询微信承保信息 */
@@ -80,31 +84,26 @@
 
     #head_top {
         background-color: $blue;
-        position: absolute;
         z-index: 100;
-        left: 0;
-        top: 0;
-        @include wh(100%, 1.95rem);
+        width: 100%;
+        height: 1.95rem;
+        display: table;
     }
 
     .title_head {
-        @include center;
-        width: 50%;
         color: #fff;
+        height: 100%;
+        font-size: 1.2rem;
+        font-weight: bold;
         text-align: center;
-
-        .title_text {
-            @include sc(1.2rem, #fff);
-            text-align: center;
-            font-weight: bold;
-        }
+        display: table-cell;
+        vertical-align: middle;
     }
 
     #el_main {
-        position: absolute;
         width: 100%;
-        margin-top: 20%;
-        padding: 5% 5%;
+        margin-top: 4rem;
+        padding: 0 5% 0 5%;
     }
 
     .el-col {

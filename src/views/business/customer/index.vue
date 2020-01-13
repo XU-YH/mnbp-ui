@@ -76,7 +76,7 @@
                 >删除
                 </el-button>
             </el-col>
-            <el-col :span="1.5">
+            <el-col :span="1.5" v-show="false">
                 <el-button
                         type="warning"
                         icon="el-icon-download"
@@ -99,7 +99,8 @@
         </el-row>
 
         <el-table v-loading="loading" :data="customerList" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55" align="center"/>
+            <el-table-column type="selection" width="45" align="center" />
+            <el-table-column label="序号" type="index" />
             <!--<el-table-column label="ID" align="center" prop="id" />-->
             <el-table-column label="客户姓名" align="center" prop="customerName"/>
             <el-table-column label="方案代码" align="center" prop="schemeCode"/>
@@ -237,9 +238,9 @@
                     <em>点击上传</em>
                 </div>
                 <div class="el-upload__tip" slot="tip">
-                    <el-checkbox v-model="upload.updateSupport"/>
-                    是否更新已经存在的用户数据
-                    <el-link type="info" style="font-size:12px" @click="importTemplate">下载模板</el-link>
+                    <!--<el-checkbox v-model="upload.updateSupport"/>-->
+                    <!--是否更新已经存在的用户数据-->
+                    <el-link type="primary" underline="true" style="font-size:16px; float: right" @click="importTemplate">下载模板</el-link>
                 </div>
                 <div class="el-upload__tip" style="color:red" slot="tip">提示：仅允许导入“xls”或“xlsx”格式文件！</div>
             </el-upload>

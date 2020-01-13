@@ -101,3 +101,11 @@ export function praseStrEmpty(str) {
     }
     return str;
 }
+
+// 日期加上传入的年份
+export function addYear(eDate, duration) {
+	let date = new Date(eDate);
+	var year = date.getFullYear();
+	date.setFullYear(year + duration)
+	return date;
+}

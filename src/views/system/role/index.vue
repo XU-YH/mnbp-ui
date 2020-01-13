@@ -85,7 +85,7 @@
           v-hasPermi="['system:role:remove']"
         >删除</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <el-col :span="1.5" v-show="false">
         <el-button
           type="warning"
           icon="el-icon-download"
@@ -97,8 +97,9 @@
     </el-row>
 
     <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="角色编号" prop="roleId" width="120" />
+      <el-table-column type="selection" width="45" align="center" />
+      <el-table-column label="序号" type="index" />
+      <!--<el-table-column label="角色编号" prop="roleId" width="120" />-->
       <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="150" />
       <el-table-column label="权限字符" prop="roleKey" :show-overflow-tooltip="true" width="150" />
       <el-table-column label="显示顺序" prop="roleSort" width="100" />
@@ -132,6 +133,7 @@
             icon="el-icon-circle-check"
             @click="handleDataScope(scope.row)"
             v-hasPermi="['system:role:edit']"
+            v-show="false"
           >数据权限</el-button>
           <el-button
             size="mini"

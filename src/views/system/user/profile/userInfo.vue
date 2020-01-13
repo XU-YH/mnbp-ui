@@ -2,7 +2,7 @@
   <el-form ref="form" :model="user" :rules="rules" label-width="80px">
     <el-form-item label="用户昵称" prop="nickName">
       <el-input v-model="user.nickName" />
-    </el-form-item> 
+    </el-form-item>
     <el-form-item label="手机号码" prop="phonenumber">
       <el-input v-model="user.phonenumber" maxlength="11" />
     </el-form-item>
@@ -63,7 +63,7 @@ export default {
         if (valid) {
           updateUserProfile(this.user).then(response => {
             if (response.code === 200) {
-              this.msgSuccess("修改成功");
+              this.msgSuccess("修改成功，重新登录即可");
             } else {
               this.msgError(response.msg);
             }

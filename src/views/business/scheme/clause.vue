@@ -51,7 +51,7 @@
           v-hasPermi="['business:insuranceScheme:remove']"
         >删除</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <el-col :span="1.5" v-show="false">
         <el-button
           type="warning"
           icon="el-icon-download"
@@ -63,11 +63,18 @@
     </el-row>
 
     <el-table v-loading="loading" :data="clauseList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="selection" width="45" align="center" />
+      <el-table-column label="序号" type="index" />
       <!--<el-table-column label="ID" align="center" prop="id" />-->
       <el-table-column label="条款名称" align="center" prop="clauseName" />
       <el-table-column label="赔偿限额" align="center" prop="compensationLimit" />
-      <el-table-column label="条款内容" align="center" prop="clauseContent" />
+      <el-table-column label="条款内容" align="center" prop="clauseContent" :show-overflow-tooltip="true">
+        <!--<template slot-scope="scope">
+          <el-tooltip class="item" effect="dark" :content="scope.row.clauseContent" placement="top" enterable>
+            <p>{{scope.row.clauseContent.length > 10 ? (scope.row.clauseContent.substr(0, 10) + "...") : scope.row.clauseContent}}</p>
+          </el-tooltip>
+        </template>-->
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -97,7 +104,7 @@
     />
 
     <!-- 添加或修改方案条款对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px">
+    <el-dialog :title="title" :visible.sync="open" width="700px">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="方案id" v-show="false" >
           <el-input v-model="form.schemeId" />
@@ -112,7 +119,14 @@
           <el-input v-model="form.compensationLimit" placeholder="请输入赔偿限额" />
         </el-form-item>
         <el-form-item label="条款内容" prop="clauseContent">
-          <el-input v-model="form.clauseContent" type="textarea" placeholder="请输入条款内容" />
+          <el-input
+                  v-model="form.clauseContent"
+                  type="textarea"
+                  placeholder="请输入条款内容"
+                  :autosize="{ minRows: 8, maxRows: 10}"
+                  maxlength="500"
+                  show-word-limit
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -312,6 +326,24 @@ export default {
           this.download(response.msg, true);
         }).catch(function() {});
     }
+  },
+  /** 弹出条款内容 */
+  alertClauseContent() {
+    this.$alert('这是一段内容', '标题名称', {
+      confirmButtonText: '确定',
+      callback: action => {
+        this.$message({
+          type: 'info',
+          message: `action: ${ action }`
+        });
+      }
+    });
   }
 };
 </script>
+
+<style lang="css">
+  .el-tooltip__popper {
+    max-width: 40%;
+  }
+</style>

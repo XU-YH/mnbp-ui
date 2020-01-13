@@ -2,17 +2,17 @@
     <div style="background-color: #eef1f6; width: 100%; height: 100%">
         <el-header id="head_top">
             <section class="title_head">
-                <span class="title_text">承保信息查询</span>
+                承保信息查询
             </section>
         </el-header>
         <el-form id="form" ref="form" :model="queryParams" :rules="rules" label-width="68px">
             <el-form-item label="姓名" prop="name">
-                <el-input v-model="queryParams.name" placeholder="姓名"/>
+                <el-input v-model="queryParams.name" placeholder="请输入姓名"/>
             </el-form-item>
             <el-form-item label="证件号" prop="idNumber">
-                <el-input v-model="queryParams.idNumber" placeholder="证件号"/>
+                <el-input v-model="queryParams.idNumber" placeholder="请输入证件号"/>
             </el-form-item>
-            <el-button type="primary" style="font-weight: bold; width: 80%; margin: 20% 10%; font-size: medium"
+            <el-button type="primary" style="font-weight: bold; width: 80%; margin: 8rem 10% 0 10%; font-size: medium"
                        @click="submit"> 查 询
             </el-button>
         </el-form>
@@ -61,32 +61,26 @@
 
     #head_top {
         background-color: $blue;
-        position: absolute;
         z-index: 100;
-        left: 0;
-        top: 0;
-        @include wh(100%, 1.95rem);
+        width: 100%;
+        height: 1.95rem;
+        display: table;
     }
 
     .title_head {
-        @include center;
-        width: 50%;
         color: #fff;
+        height: 100%;
+        font-size: 1.2rem;
+        font-weight: bold;
         text-align: center;
-
-        .title_text {
-            @include sc(1.2rem, #fff);
-            text-align: center;
-            font-weight: bold;
-        }
+        display: table-cell;
+        vertical-align: middle;
     }
 
     #form {
-        position: absolute;
+        margin-top: 8rem;
         width: 100%;
-        margin-top: 40%;
-        padding: 5% 5%;
-
+        padding: 0 5% 0 5%;
     }
 
 

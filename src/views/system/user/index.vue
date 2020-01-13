@@ -114,7 +114,7 @@
               v-hasPermi="['system:user:remove']"
             >删除</el-button>
           </el-col>
-          <el-col :span="1.5">
+          <el-col :span="1.5" v-show="false">
             <el-button
               type="info"
               icon="el-icon-upload2"
@@ -123,7 +123,7 @@
               v-hasPermi="['system:user:import']"
             >导入</el-button>
           </el-col>
-          <el-col :span="1.5">
+          <el-col :span="1.5" v-show="false">
             <el-button
               type="warning"
               icon="el-icon-download"
@@ -135,8 +135,9 @@
         </el-row>
 
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="40" align="center" />
-          <el-table-column label="用户编号" align="center" prop="userId" />
+          <el-table-column type="selection" width="45" align="center" />
+          <el-table-column label="序号" type="index" />
+          <!--<el-table-column label="用户编号" align="center" prop="userId" />-->
           <el-table-column label="用户名称" align="center" prop="userName" :show-overflow-tooltip="true" />
           <el-table-column label="用户昵称" align="center" prop="nickName" :show-overflow-tooltip="true" />
           <el-table-column label="角色" align="center">
@@ -166,7 +167,7 @@
           <el-table-column
             label="操作"
             align="center"
-            width="180"
+            width="220"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope">
@@ -191,7 +192,7 @@
                 icon="el-icon-key"
                 @click="handleResetPwd(scope.row)"
                 v-hasPermi="['system:user:resetPwd']"
-              >重置</el-button>
+              >密码重置</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -238,8 +239,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="用户密码" prop="password">
-              <el-input v-model="form.password" placeholder="请输入用户密码" type="password" />
+            <el-form-item v-if="form.userId === undefined" label="用户密码" prop="password">
+              <el-input v-model="form.password" placeholder="请输入用户密码" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -432,7 +433,7 @@ export default {
         email: [
           {
             type: "email",
-            message: "'请输入正确的邮箱地址",
+            message: "请输入正确的邮箱地址",
             trigger: ["blur", "change"]
           }
         ],
@@ -462,7 +463,7 @@ export default {
       this.sexOptions = response.data;
     });
     this.getConfigKey("sys.user.initPassword").then(response => {
-      this.initPassword = response.data;
+      this.initPassword = response.msg;
     });
   },
   methods: {
@@ -557,6 +558,8 @@ export default {
         this.open = true;
         this.title = "添加用户";
         this.form.password = this.initPassword;
+        // 固定部门id为100
+        this.form.deptId = 100;
       });
     },
     /** 修改按钮操作 */

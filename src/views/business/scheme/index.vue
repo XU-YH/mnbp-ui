@@ -55,7 +55,7 @@
           v-hasPermi="['business:insuranceScheme:remove']"
         >删除</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <el-col :span="1.5" v-show="false">
         <el-button
           type="warning"
           icon="el-icon-download"
@@ -67,12 +67,13 @@
     </el-row>
 
     <el-table v-loading="loading" :data="insuranceSchemeList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column type="selection" width="45" align="center" />
+      <el-table-column label="序号" type="index" />
       <!--<el-table-column label="ID" align="center" prop="id" />-->
       <el-table-column label="方案代码" align="center" :show-overflow-tooltip="true">
           <template slot-scope="scope">
               <router-link :to="'/scheme/clause/' + scope.row.id" class="link-type">
-                  <span>{{ scope.row.schemeCode }}</span>
+                  <span style="font-weight: bold">{{ scope.row.schemeCode }}</span>
               </router-link>
           </template>
       </el-table-column>

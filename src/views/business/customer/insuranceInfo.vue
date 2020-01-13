@@ -26,7 +26,8 @@
         </el-form>
 
         <el-table v-loading="loading" :data="customerInsuranceInfoList" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55" align="center" />
+            <el-table-column type="selection" width="45" align="center" />
+            <el-table-column label="序号" type="index" />
             <!--<el-table-column label="ID" align="center" prop="id" />-->
             <el-table-column label="姓名" align="center" prop="customerName" />
             <el-table-column label="证件号" align="center" prop="idNumber" width="200" />
@@ -34,7 +35,7 @@
             <el-table-column label="方案名称" align="center">
                 <template slot-scope="scope">
                     <router-link :to="'/scheme/clause/' + scope.row.schemeId" class="link-type">
-                        <span>{{ scope.row.schemeName }}</span>
+                        <span style="font-weight: bold">{{ scope.row.schemeName }}</span>
                     </router-link>
                 </template>
             </el-table-column>
