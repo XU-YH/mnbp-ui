@@ -125,16 +125,24 @@
 </template>
 
 <script>
-import { listInsuranceScheme, getInsuranceScheme, delInsuranceScheme, addInsuranceScheme, updateInsuranceScheme, exportInsuranceScheme } from "@/api/business/scheme";
+import { listInsuranceScheme, getInsuranceScheme, delInsuranceScheme, addInsuranceScheme, updateInsuranceScheme, exportInsuranceScheme, selectBySchemeCode } from "@/api/business/scheme";
 
 export default {
   data() {
+    // 校验方案代码是否已存在
+    let verifySchemeCode = (rule, value, callback) => {
+      var scheme = {id: this.form.id, schemeCode: value};
+      selectBySchemeCode(scheme).then(response => {
+        if (response.data !== undefined) {
+          callback('方案代码已存在');
+        }
+        callback();
+      });
+    }
     return {
       // 遮罩层
       loading: true,
       // 选中数组
-      ids: [],
-      // 选中方案数组
       schemeNames: [],
       // 非单个禁用
       single: true,
@@ -160,10 +168,18 @@ export default {
       // 表单校验
       rules: {
         schemeCode: [
-          { required: true, message: "方案代码不能为空", trigger: "blur" }
-        ],        schemeName: [
+          { required: true, message: "方案代码不能为空", trigger: "blur" },
+          {
+            pattern: /^[a-zA-Z0-9]{8}$/,
+            message: "方案代码由字母和数字组成，且固定8位长度",
+            trigger: "blur"
+          },
+          { validator: verifySchemeCode, trigger: 'blur' }
+        ],
+        schemeName: [
           { required: true, message: "方案名称不能为空", trigger: "blur" }
-        ],      }
+        ]
+      }
     };
   },
   created() {

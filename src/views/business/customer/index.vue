@@ -103,7 +103,7 @@
             <el-table-column label="序号" type="index" />
             <!--<el-table-column label="ID" align="center" prop="id" />-->
             <el-table-column label="客户姓名" align="center" prop="customerName"/>
-            <el-table-column label="方案代码" align="center" prop="schemeCode"/>
+            <el-table-column label="方案代码" align="center" prop="schemeCode" width="150"/>
             <el-table-column label="证件类型" align="center" prop="idType" :formatter="idTypeFormat" width="100"/>
             <el-table-column label="证件号" align="center" prop="idNumber" width="200"/>
             <el-table-column label="性别" align="center" prop="sex" :formatter="sexFormat"/>
@@ -157,7 +157,7 @@
                 <el-form-item label="客户姓名" prop="customerName">
                     <el-input v-model="form.customerName" placeholder="请输入客户姓名"/>
                 </el-form-item>
-                <el-form-item label="证件类型">
+                <el-form-item label="证件类型" prop="idType">
                     <el-select v-model="form.idType" placeholder="请选择证件类型">
                         <el-option
                                 v-for="dict in idTypeOptions"
@@ -209,7 +209,7 @@
                     <el-input v-model="form.branchName" placeholder="请输入分公司名称"/>
                 </el-form-item>
                 <el-form-item label="方案代码" prop="schemeCode">
-                    <el-input v-model="form.schemeCode" placeholder="请输入方案代码"/>
+                    <el-input v-model="form.schemeCode" placeholder="请输入方案代码" style="width: 200px"/>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -346,9 +346,11 @@
           customerName: [
             { required: true, message: '客户姓名不能为空', trigger: 'blur' }
           ], idType: [
-            { required: true, message: '证件类型，数据字典不能为空', trigger: 'blur' }
+            { required: true, message: '证件类型不能为空', trigger: 'change' }
           ], idNumber: [
             { required: true, message: '证件号不能为空', trigger: 'blur' }
+          ], birthdate:[
+            { required: true, message: '出生日期不能为空', trigger: 'blur' }
           ], examinatidonDate: [
             { required: true, message: '到检日期（体检）不能为空', trigger: 'blur' }
           ], province: [
@@ -358,7 +360,12 @@
           ], branchName: [
             { required: true, message: '分公司名称不能为空', trigger: 'blur' }
           ], schemeCode: [
-            { required: true, message: '方案代码不能为空', trigger: 'blur' }
+            { required: true, message: '方案代码不能为空', trigger: 'blur' },
+            {
+              pattern: /^[a-zA-Z0-9]{8}$/,
+              message: "方案代码由字母和数字组成，且固定8位长度",
+              trigger: "blur"
+            }
           ]
         }
       }

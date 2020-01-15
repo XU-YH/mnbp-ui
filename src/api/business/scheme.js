@@ -51,3 +51,12 @@ export function exportInsuranceScheme(query) {
     params: query
   })
 }
+
+// 根据方案代码查询方案
+export function selectBySchemeCode(query) {
+  return request({
+    url: '/business/insuranceScheme/selectBySchemeCode',
+    method: 'get',
+    params: query
+  })
+}
