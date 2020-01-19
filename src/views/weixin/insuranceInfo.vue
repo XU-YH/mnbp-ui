@@ -10,7 +10,7 @@
                 <h4 style="text-indent:2em;">尊敬的【{{queryParams.idNumber}}】，您已获得由美年大健康赠送的保险权益</h4>
                 <span style="font-size: 0.9rem;">由PICC人保财险承保</span>
 
-                <h4 align="center" style="margin: 6rem 0 3rem 0">保障内容</h4>
+                <h4 align="center" style="margin: 4rem 0 3rem 0">保障内容</h4>
                 <el-row :gutter="10">
                     <el-col :xs="18" :sm="18" :md="18" :lg="18" :xl="18">
                         <div class="grid-content">被保险人</div>
@@ -80,10 +80,8 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../../style/mixin";
-
     #head_top {
-        background-color: $blue;
+        background-color: #3190e8;
         z-index: 100;
         width: 100%;
         height: 1.95rem;
@@ -102,7 +100,7 @@
 
     #el_main {
         width: 100%;
-        margin-top: 4rem;
+        margin-top: 2rem;
         padding: 0 5% 0 5%;
     }
 

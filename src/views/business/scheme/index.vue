@@ -285,9 +285,9 @@ export default {
           type: "warning"
         }).then(function() {
           return delInsuranceScheme(ids);
-        }).then(() => {
+        }).then(response => {
           this.getList();
-          this.msgSuccess("删除成功");
+          this.msgSuccess(response.msg);
         }).catch(function() {});
     },
     /** 导出按钮操作 */

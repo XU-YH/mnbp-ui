@@ -103,17 +103,17 @@
             <el-table-column label="序号" type="index" />
             <!--<el-table-column label="ID" align="center" prop="id" />-->
             <el-table-column label="客户姓名" align="center" prop="customerName"/>
-            <el-table-column label="方案代码" align="center" prop="schemeCode" width="150"/>
+            <el-table-column label="方案代码" align="center" prop="schemeCode" width="130"/>
             <el-table-column label="证件类型" align="center" prop="idType" :formatter="idTypeFormat" width="100"/>
-            <el-table-column label="证件号" align="center" prop="idNumber" width="200"/>
-            <el-table-column label="性别" align="center" prop="sex" :formatter="sexFormat"/>
-            <el-table-column label="出生日期" align="center" prop="birthdate" width="180">
+            <el-table-column label="证件号" align="center" prop="idNumber" width="180"/>
+            <el-table-column label="性别" align="center" prop="sex" :formatter="sexFormat" width="50"/>
+            <el-table-column label="出生日期" align="center" prop="birthdate" width="100">
                 <template slot-scope="scope">
                     <span>{{ parseTime(scope.row.birthdate, '{y}-{m}-{d}') }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="联系电话" align="center" prop="phonenumber" width="110"/>
-            <el-table-column label="到检日期" align="center" prop="examinatidonDate" width="180">
+            <el-table-column label="到检日期" align="center" prop="examinatidonDate" width="100">
                 <template slot-scope="scope">
                     <span>{{ parseTime(scope.row.examinatidonDate, '{y}-{m}-{d}') }}</span>
                 </template>

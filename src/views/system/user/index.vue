@@ -358,6 +358,8 @@ export default {
       loading: true,
       // 选中数组
       ids: [],
+      // 选中用户名称数组
+      userNames: [],
       // 非单个禁用
       single: true,
       // 非多个禁用
@@ -545,6 +547,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.userId);
+      this.userNames = selection.map(item => item.userName);
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
@@ -624,7 +627,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const userIds = row.userId || this.ids;
-      this.$confirm('是否确认删除用户编号为"' + userIds + '"的数据项?', "警告", {
+      const userNames = row.userName || this.userNames;
+      this.$confirm('是否确认删除用户名称为"' + userNames + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

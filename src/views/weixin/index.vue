@@ -57,10 +57,8 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../../style/mixin";
-
     #head_top {
-        background-color: $blue;
+        background-color: #3190e8;
         z-index: 100;
         width: 100%;
         height: 1.95rem;
