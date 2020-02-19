@@ -120,8 +120,8 @@
             </el-table-column>
             <el-table-column label="省份" align="center" prop="province"/>
             <el-table-column label="城市" align="center" prop="city"/>
-            <el-table-column label="分公司名" align="center" prop="branchName"/>
-            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+            <el-table-column label="分公司名" align="center" prop="branchName" :show-overflow-tooltip="true"/>
+            <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200">
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
@@ -240,7 +240,7 @@
                 <div class="el-upload__tip" slot="tip">
                     <!--<el-checkbox v-model="upload.updateSupport"/>-->
                     <!--是否更新已经存在的用户数据-->
-                    <el-link type="primary" underline="true" style="font-size:16px; float: right" @click="importTemplate">下载模板</el-link>
+                    <el-link type="primary" :underline="true" style="font-size:16px; float: right" @click="importTemplate">下载模板</el-link>
                 </div>
                 <div class="el-upload__tip" style="color:red" slot="tip">提示：仅允许导入“xls”或“xlsx”格式文件！</div>
             </el-upload>
@@ -344,7 +344,8 @@
         // 表单校验
         rules: {
           customerName: [
-            { required: true, message: '客户姓名不能为空', trigger: 'blur' }
+            { required: true, message: '客户姓名不能为空', trigger: 'blur' },
+            { max: 30, message: '长度不能超过30个字符', trigger: 'change'}
           ], idType: [
             { required: true, message: '证件类型不能为空', trigger: 'change' }
           ], idNumber: [
@@ -354,11 +355,14 @@
           ], examinatidonDate: [
             { required: true, message: '到检日期（体检）不能为空', trigger: 'blur' }
           ], province: [
-            { required: true, message: '省份不能为空', trigger: 'blur' }
+            { required: true, message: '省份不能为空', trigger: 'blur' },
+            { max: 10, message: '长度不能超过10个字符', trigger: 'change'}
           ], city: [
-            { required: true, message: '城市不能为空', trigger: 'blur' }
+            { required: true, message: '城市不能为空', trigger: 'blur' },
+            { max: 10, message: '长度不能超过10个字符', trigger: 'change'}
           ], branchName: [
-            { required: true, message: '分公司名称不能为空', trigger: 'blur' }
+            { required: true, message: '分公司名称不能为空', trigger: 'blur' },
+            { max: 15, message: '长度不能超过15个字符', trigger: 'change'}
           ], schemeCode: [
             { required: true, message: '方案代码不能为空', trigger: 'blur' },
             {
@@ -529,10 +533,17 @@
       },
       // 文件上传中处理
       handleFileUploadProgress(event, file, fileList) {
+        this.$loading({
+          lock: true,
+          text: '导入中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
         this.upload.isUploading = true
       },
       // 文件上传成功处理
       handleFileSuccess(response, file, fileList) {
+        this.$loading().close();
         this.upload.open = false
         this.upload.isUploading = false
         this.$refs.upload.clearFiles()

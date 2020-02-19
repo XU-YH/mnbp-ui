@@ -177,7 +177,8 @@ export default {
           { validator: verifySchemeCode, trigger: 'blur' }
         ],
         schemeName: [
-          { required: true, message: "方案名称不能为空", trigger: "blur" }
+          { required: true, message: "方案名称不能为空", trigger: "blur" },
+          { max: 20, message: "长度不能超过20个字符", trigger: "change"}
         ]
       }
     };

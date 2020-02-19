@@ -32,11 +32,12 @@
         // 表单校验
         rules: {
           name: [
-            { required: true, message: '姓名不能为空', trigger: 'blur' }
+            { required: true, message: '姓名不能为空', trigger: 'blur' },
+            { max: 30, message: '长度不能超过30个字符', trigger: 'change'}
           ],
           idNumber: [
             { required: true, message: '证件号不能为空', trigger: 'blur' },
-            { max: 20, message: '长度在最大 20 个字符', trigger: 'blur' }
+            { max: 20, message: '长度不能超过20 个字符', trigger: 'change' }
           ]
         }
       }
