@@ -350,8 +350,6 @@
             { required: true, message: '证件类型不能为空', trigger: 'change' }
           ], idNumber: [
             { required: true, message: '证件号不能为空', trigger: 'blur' }
-          ], birthdate:[
-            { required: true, message: '出生日期不能为空', trigger: 'blur' }
           ], examinatidonDate: [
             { required: true, message: '到检日期（体检）不能为空', trigger: 'blur' }
           ], province: [
