@@ -8,7 +8,7 @@ import { getToken } from '@/utils/auth'
 NProgress.configure({ showSpinner: false })
 
 // 设置白名单
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/weixin', '/weixin/insuranceInfo']
+const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
