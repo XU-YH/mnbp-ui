@@ -26,7 +26,7 @@
                     </el-col>
                     <el-col :xs="14" :sm="14" :md="14" :lg="14" :xl="14" align="right">
                         <div class="grid-content"
-                             v-text="parseTime(insuranceInfo.exminatidonDate, '{y}-{m}-{d}') + '至' + parseTime(addYear(insuranceInfo.exminatidonDate, 1), '{y}-{m}-{d}')"></div>
+                             v-text="parseTime(insuranceInfo.exminatidonDate, '{y}-{m}-{d}') + '至' + parseTime(addYearSubOneDay(insuranceInfo.exminatidonDate, 1), '{y}-{m}-{d}')"></div>
                     </el-col>
                     <el-divider/>
                 </el-row>

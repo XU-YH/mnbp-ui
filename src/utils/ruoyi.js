@@ -109,3 +109,10 @@ export function addYear(eDate, duration) {
 	date.setFullYear(year + duration)
 	return date;
 }
+
+// 日期加上传入的年份，2020-02-25 - 2020-02-24
+export function addYearSubOneDay(eDate, duration) {
+  let date = addYear(eDate, duration);
+  var time = date.getTime() - 24 * 60 * 60 * 1000;
+  return new Date(time);
+}
