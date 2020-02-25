@@ -142,14 +142,14 @@ export default {
     }
   }
 };
-</script> 
+</script>
 
 <style>
 .editor {
   line-height: normal !important;
   height: 192px;
 }
-.el-upload {
+.quill-img {
   display: none;
 }
 .ql-snow .ql-tooltip[data-mode="link"]::before {
