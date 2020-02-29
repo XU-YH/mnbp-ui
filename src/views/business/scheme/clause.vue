@@ -182,7 +182,7 @@ export default {
       rules: {
         clauseName: [
           { required: true, message: "条款名称不能为空", trigger: "blur" },
-          { max: 20, message: "长度不能超过20个字符", trigger: "change"}
+          { max: 12, message: "长度不能超过12个字符", trigger: "change"}
         ],        compensationLimit: [
           { required: true, message: "赔偿限额不能为空", trigger: "blur" }
         ],        clauseContent: [
